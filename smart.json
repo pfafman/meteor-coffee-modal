@@ -1,0 +1,11 @@
+
+{
+    "name": "coffee-modal",
+    "description": "Display a modal via bootstrap written in coffeescript",
+    "homepage": "https://github.com/pfafman/meteor-coffee-modal",
+    "author": "Tim Pfafman <tim@pfafman.com>",
+    "version": "0.1.0",
+    "git": "https://github.com/pfafman/meteor-coffee-modal.git",
+    "packages": {
+    }
+}
