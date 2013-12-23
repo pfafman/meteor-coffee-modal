@@ -59,6 +59,7 @@ class CoffeeModalClass
         @callback = callback
         @set("closeLabel", "Cancel")
         @set("submitLabel", okText)
+        $('#promptInput').val('')
         @_show()
 
 
