@@ -64,12 +64,22 @@ class CoffeeModalClass
 
 
     form: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
-        @_setData(message, title, templateName, data)
+        @_setData('', title, templateName, data)
         @type = "form"
         @callback = callback
         @set("closeLabel", "Cancel")
         @set("submitLabel", okText)
         @_show()
+
+    fromForm: (form) ->
+        result = {}
+        form = $(form)
+        for key in form.serializeArray()
+            result[key.name] = key.value
+        # Override the result with the boolean values of checkboxes, if any
+        for check in form.find "input:checkbox"
+            result[$(check).prop 'name'] = $(check).prop 'checked'
+        result
 
     doCallback: (yesNo, event = null) ->
 
@@ -79,13 +89,14 @@ class CoffeeModalClass
             when 'select'
                 returnVal = $('select option:selected')
             when 'form'
-                returnVal = @fromForm(e.target)
+                returnVal = @fromForm(event.target)
             else
                 returnVal = null
 
         if @callback?
             @callback(yesNo, returnVal, event)
 
+    
 
 
 CoffeeModal = new CoffeeModalClass()
