@@ -4,51 +4,86 @@ class CoffeeModalClass
     constructor: ->
         @defaults()
 
+    set: (key, value) ->
+        Session.set("_coffeeModal_#{key}", value)
 
     defaults: ->
-        console.log("CoffeeModal defaults")
-        Session.set("_coffeeModal_body_template", null)
-        Session.set("_coffeeModal_title", 'Message')
-        Session.set("_coffeeModal_message", '')
-        Session.set("_coffeeModal_closeLabel", null)
-        Session.set("_coffeeModal_body_template_data", {})
+        @set("body_template", null)
+        @set("title", 'Message')
+        @set("message", '')
+        @set("closeLabel", null)
+        @set("body_template_data", {})
         @callback = null
+        @type = "alert"
 
-    _setData: (message, title="Message", bodyTemplate=null, bodyTemplateData= {}) ->
+    _setData: (message, title = "Message", bodyTemplate = null, bodyTemplateData = {}) ->
         @defaults()
-        Session.set("_coffeeModal_body_template", bodyTemplate)
-        Session.set("_coffeeModal_body_template_data", bodyTemplateData)
-        Session.set("_coffeeModal_title", title)
-        Session.set("_coffeeModal_message", message)
-        Session.set("_coffeeModal_submitLabel", "OK")
+        @set("body_template", bodyTemplate)
+        @set("body_template_data", bodyTemplateData)
+        @set("title", title)
+        @set("message", message)
+        @set("submitLabel", "OK")
 
     _show: ->
         $('#coffeeModal').modal('show') 
 
-    message: (message, title="Message", bodyTemplate=null, bodyTemplateData= {}) ->
+    message: (message, title = "Message", bodyTemplate = null, bodyTemplateData = {}) ->
         @_setData(message, title)
         @_show()        
 
-    alert: (message, alert="Alert", title="Alert") ->
+    alert: (message, alert = "Alert", title = "Alert") ->
         @_setData message, title, "coffeeModalAlert",
             label: alert
             message: message
         @_show()
 
-    error: (message, alert="Alert", title="Alert") ->
+    error: (message, alert = "Error", title = "Error") ->
         @_setData message, title, "coffeeModalError",
             label: alert
             message: message
         @_show()
 
-    confirm: (message, callback, title="Confirm") ->
+    confirm: (message, callback, title = "Confirm") ->
         @_setData(message, title)
+        @type = "confirm"
         @callback = callback
-        Session.set("_coffeeModal_closeLabel", "Cancel")
-        Session.set("_coffeeModal_submitLabel", "Yes")
+        @set("closeLabel", "Cancel")
+        @set("submitLabel", "Yes")
         @_show()
 
+    prompt: (message, callback, title = 'Prompt', okText = 'Submit', placeholder = "Enter something ...") ->
+        @_setData message, title, "coffeeModalPrompt",
+            message: message
+            placeholder: placeholder
+        @type = "prompt"
+        @callback = callback
+        @set("closeLabel", "Cancel")
+        @set("submitLabel", okText)
+        @_show()
+
+
+    doCallback: (yesNo, event = null) ->
+
+        switch @type
+            when 'prompt'
+                returnVal = $('#promptInput').val()
+            when 'select'
+                returnVal = $('select option:selected')
+            when 'form'
+                returnVal = @fromForm(e.target)
+            else
+                returnVal = null
+
+        if @callback?
+            @callback(yesNo, returnVal, event)
+
+
+
 CoffeeModal = new CoffeeModalClass()
+
+#Template.coffeeModal.rendered = ->
+#    Meteor.defer ->
+#        $('#promptInput')?.focus()
 
 Template.coffeeModal.helpers
     title: ->
@@ -56,7 +91,6 @@ Template.coffeeModal.helpers
 
     body: ->
         if Session.get("_coffeeModal_body_template")? and Template[Session.get("_coffeeModal_body_template")]
-            console.log("alert body")
             Template[Session.get("_coffeeModal_body_template")](Session.get("_coffeeModal_body_template_data"))
         else
             Session.get("_coffeeModal_message")
@@ -70,13 +104,10 @@ Template.coffeeModal.helpers
 
 Template.coffeeModal.events
     "click #closeButton": (e, tmpl) ->
-        console.log('close modal')
+        CoffeeModal.doCallback(false, e)
 
     "click #submitButton": (e, tmpl) =>
-        console.log("submit callback", CoffeeModal.callback)
-        if CoffeeModal.callback?  # Check that is is a functin
-            console.log("have callback")
-            CoffeeModal.callback()
+        CoffeeModal.doCallback(true, e)
         $('#coffeeModal').modal('hide')
 
 

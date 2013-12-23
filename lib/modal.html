@@ -1,7 +1,7 @@
 
 <template name="coffeeModal">
   <!-- Modal -->
-  <div class="modal fade" id="coffeeModal" tabindex="-1" role="dialog" 
+  <div class="coffee-modal modal fade" id="coffeeModal" tabindex="-1" role="dialog" 
     aria-labelledby="coffeeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -26,13 +26,13 @@
 <!-- Templates to insert into the mainBody above -->
 
 <template name="coffeeModalAlert">
-  <div class="alert">
+  <div class="alert alert-warning">
     <strong id='label'>{{label}}</strong> <span id='message'>{{{message}}}</span>
   </div>
 </template>
 
 <template name="coffeeModalError">
-  <div class="alert alert-error">
+  <div class="alert alert-danger">
     <h4 id='label'>{{label}}</h4> 
     <strong id ='message'>{{message}}</strong>
   </div>
