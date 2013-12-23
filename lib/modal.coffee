@@ -63,6 +63,14 @@ class CoffeeModalClass
         @_show()
 
 
+    form: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
+        @_setData(message, title, templateName, data)
+        @type = "form"
+        @callback = callback
+        @set("closeLabel", "Cancel")
+        @set("submitLabel", okText)
+        @_show()
+
     doCallback: (yesNo, event = null) ->
 
         switch @type
