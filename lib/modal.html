@@ -5,19 +5,21 @@
     aria-labelledby="coffeeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="coffeeModalLabel">{{title}}</h4>
-        </div>
-        <div class="modal-body">
-          {{{body}}}
-        </div>
-        <div class="modal-footer">
-          {{#if closeLabel}}
-            <button id="closeButton" type="button" class="btn btn-default" data-dismiss="modal">{{closeLabel}}</button>
-          {{/if}}
-          <button id="submitButton" type="button" class="btn btn-primary">{{submitLabel}}</button>
-        </div>
+        <form id="modalDialogForm" class="form-horizontal" role="form">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="coffeeModalLabel">{{title}}</h4>
+          </div>
+          <div class="modal-body">
+            {{{body}}}
+          </div>
+          <div class="modal-footer">
+            {{#if closeLabel}}
+              <button id="closeButton" type="button" class="btn btn-default" data-dismiss="modal">{{closeLabel}}</button>
+            {{/if}}
+            <button id="submitButton" type="submit" class="btn btn-primary">{{submitLabel}}</button>
+          </div>
+        </form>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->

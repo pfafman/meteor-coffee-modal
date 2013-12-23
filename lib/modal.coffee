@@ -6,6 +6,7 @@ class CoffeeModalClass
 
     set: (key, value) ->
         Session.set("_coffeeModal_#{key}", value)
+        #@[key] = value
 
     defaults: ->
         @set("body_template", null)
@@ -25,7 +26,8 @@ class CoffeeModalClass
         @set("submitLabel", "OK")
 
     _show: ->
-        $('#coffeeModal').modal('show') 
+        Meteor.defer ->
+            $('#coffeeModal').modal('show') 
 
     message: (message, title = "Message", bodyTemplate = null, bodyTemplateData = {}) ->
         @_setData(message, title)
@@ -64,6 +66,7 @@ class CoffeeModalClass
 
 
     form: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
+        console.log("form", templateName)
         @_setData('', title, templateName, data)
         @type = "form"
         @callback = callback
@@ -82,7 +85,6 @@ class CoffeeModalClass
         result
 
     doCallback: (yesNo, event = null) ->
-
         switch @type
             when 'prompt'
                 returnVal = $('#promptInput').val()
@@ -101,32 +103,45 @@ class CoffeeModalClass
 
 CoffeeModal = new CoffeeModalClass()
 
-#Template.coffeeModal.rendered = ->
+
+cmGet = (key) ->
+    Session.get("_coffeeModal_#{key}")
+    #CoffeeModal[key]
+
+Template.coffeeModal.created = ->
+    console.log("coffeeModal created")
+
+Template.coffeeModal.rendered = ->
+    console.log("coffeeModal rendered")
 #    Meteor.defer ->
 #        $('#promptInput')?.focus()
 
 Template.coffeeModal.helpers
     title: ->
-        Session.get("_coffeeModal_title")
+        cmGet("title")
 
     body: ->
-        if Session.get("_coffeeModal_body_template")? and Template[Session.get("_coffeeModal_body_template")]
-            Template[Session.get("_coffeeModal_body_template")](Session.get("_coffeeModal_body_template_data"))
+        if cmGet("body_template")? and Template[cmGet("body_template")]?
+            Template[cmGet("body_template")](cmGet("body_template_data"))
         else
-            Session.get("_coffeeModal_message")
+            cmGet("message")
 
     closeLabel: ->
-        Session.get("_coffeeModal_closeLabel")
+        cmGet("closeLabel")
 
     submitLabel: ->
-        Session.get("_coffeeModal_submitLabel")
+        cmGet("submitLabel")
+
+    isForm: ->
+        CoffeeModal.type is 'form'
 
 
 Template.coffeeModal.events
     "click #closeButton": (e, tmpl) ->
         CoffeeModal.doCallback(false, e)
 
-    "click #submitButton": (e, tmpl) =>
+    'submit #modalDialogForm': (e, tmpl) ->
+        e.preventDefault()
         CoffeeModal.doCallback(true, e)
         $('#coffeeModal').modal('hide')
 
