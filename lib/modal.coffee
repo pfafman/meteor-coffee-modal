@@ -108,11 +108,11 @@ cmGet = (key) ->
     Session.get("_coffeeModal_#{key}")
     #CoffeeModal[key]
 
-Template.coffeeModal.created = ->
-    console.log("coffeeModal created")
+#Template.coffeeModal.created = ->
+#    console.log("coffeeModal created")
 
-Template.coffeeModal.rendered = ->
-    console.log("coffeeModal rendered")
+#Template.coffeeModal.rendered = ->
+#    console.log("coffeeModal rendered")
 #    Meteor.defer ->
 #        $('#promptInput')?.focus()
 
