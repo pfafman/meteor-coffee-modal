@@ -66,7 +66,7 @@ class CoffeeModalClass
 
 
     form: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
-        console.log("form", templateName)
+        #console.log("form", templateName, data)
         @_setData('', title, templateName, data)
         @type = "form"
         @callback = callback
