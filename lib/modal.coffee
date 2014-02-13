@@ -90,7 +90,7 @@ class CoffeeModalClass
     fromForm: (form) ->
         result = {}
         form = $(form)
-        for key in form.serializeCmObject()
+        for key of form.serializeCmObject()
             result[key.name] = key.value
         # Override the result with the boolean values of checkboxes, if any
         for check in form.find "input:checkbox"
