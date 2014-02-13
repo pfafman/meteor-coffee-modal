@@ -10,6 +10,7 @@ Package.on_use(function(api, where) {
         'templating',
         'session',
         'spark',
+        'jquery',
         'handlebars',
         'iron-router', 
         'coffeescript',
