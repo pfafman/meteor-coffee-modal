@@ -1,17 +1,4 @@
 
-# Use to serialize a form into an object
-$.fn.serializeCmObject = ->
-    o = {}
-    a = @serializeArray()
-    $.each a, ->
-        if o[@name] isnt `undefined`
-            o[@name] = [o[@name]]  unless o[@name].push
-            o[@name].push @value or ""
-        else
-            o[@name] = @value or ""
-    o
-
-
 class CoffeeModalClass
 
     constructor: ->
@@ -109,7 +96,7 @@ class CoffeeModalClass
     fromForm: (form) ->
         result = {}
         form = $(form)
-        for key of form.serializeArray()
+        for key of form.serializeArray() # This Works do not change!!!
             result[key.name] = key.value
         # Override the result with the boolean values of checkboxes, if any
         for check in form.find "input:checkbox"
