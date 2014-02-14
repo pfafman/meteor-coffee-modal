@@ -78,6 +78,19 @@ class CoffeeModalClass
         @_show()
 
 
+    status: (message, callback, title = 'Status', cancelText = 'Cancel') ->
+        @_setData message, title, "coffeeModalstatus",
+            message: message
+        @callback = callback
+        @set("submitLabel", cancelText)
+        @_show()
+
+    updateProgressMessage: (message) ->
+        console.log("updateProgressMessage", $("#progressMessage").html(), message)
+        $("#progressMessage").fadeOut 400, ->
+            $("#progressMessage").html(message)
+            $("#progressMessage").fadeIn(400)
+
     form: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
         #console.log("form", templateName, data)
         @_setData('', title, templateName, data)

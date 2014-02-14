@@ -56,8 +56,15 @@
   <div id='progressBar' class="progress progress-striped active">
     <div id="progressBarDisplay" class="bar" style="width: 0%;"></div>
   </div>
-  <div id="progressText">
+  <div id="progressMessage">
     {{message}}
+  </div>
+</template>
+
+<template name="coffeeModalstatus">
+  <div id="statusMessage">
+    <i class="fa fa-spinner fa-spin fa-2x"></i>  
+    <span class="room-for-spin" id="progressMessage">{{message}}</span>
   </div>
 </template>
 
