@@ -90,9 +90,12 @@ class CoffeeModalClass
 
     updateProgressMessage: (message) ->
         console.log("updateProgressMessage", $("#progressMessage").html(), message)
-        $("#progressMessage").fadeOut 400, ->
-            $("#progressMessage").html(message)
-            $("#progressMessage").fadeIn(400)
+        if $("#progressMessage").html()?
+            $("#progressMessage").fadeOut 400, ->
+                $("#progressMessage").html(message)
+                $("#progressMessage").fadeIn(400)
+        else
+            @set("message", message)
 
     form: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
         #console.log("form", templateName, data)
@@ -174,6 +177,9 @@ Template.coffeeModal.events
         CoffeeModal.doCallback(true, e)
         $('#coffeeModal').modal('hide')
 
+Template.coffeeModalstatus.helpers
+    progressMessage: ->
+        cmGet("message")
 
 
 
