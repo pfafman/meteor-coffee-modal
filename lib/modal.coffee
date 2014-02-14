@@ -30,6 +30,9 @@ class CoffeeModalClass
         @callback = null
         @type = "alert"
 
+    close: ->
+        $('#coffeeModal').modal('hide')
+
     _setData: (message, title = "Message", bodyTemplate = null, bodyTemplateData = {}) ->
         @defaults()
         @set("body_template", bodyTemplate)
