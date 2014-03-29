@@ -9,7 +9,6 @@ Package.on_use(function(api, where) {
         'mongo-livedata', 
         'templating',
         'session',
-        'spark',
         'jquery',
         'handlebars',
         'iron-router', 

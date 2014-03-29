@@ -72,10 +72,10 @@
   <p><strong>{{message}}</strong></p>
   <select>
     {{#each items}}
-    <option value="{{number}}">{{displayName}}</option>
-    {{#each childeren}}
-    <option value="{{number}}"> &nbsp; {{displayName}}</option>
-    {{/each}}
+      <option value="{{number}}">{{displayName}}</option>
+      {{#each childeren}}
+        <option value="{{number}}"> &nbsp; {{displayName}}</option>
+      {{/each}}
     {{/each}}
   </select>
 </template>
