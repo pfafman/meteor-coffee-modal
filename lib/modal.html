@@ -11,7 +11,11 @@
             <h4 class="modal-title" id="coffeeModalLabel">{{title}}</h4>
           </div>
           <div class="modal-body">
-            {{{body}}}
+            {{#if template}}
+              {{> template templateData}}
+            {{else}}
+              {{{body}}}
+            {{/if}}
           </div>
           <div class="modal-footer">
             {{#if closeLabel}}

@@ -139,11 +139,15 @@ Template.coffeeModal.helpers
     title: ->
         cmGet("title")
 
-    body: ->
+    template: ->
         if cmGet("body_template")? and Template[cmGet("body_template")]?
-            Template[cmGet("body_template")](cmGet("body_template_data"))
-        else
-            cmGet("message")
+            Template[cmGet("body_template")]
+
+    templateData: ->
+        cmGet("body_template_data")
+
+    body: ->
+        cmGet("message")
 
     closeLabel: ->
         cmGet("closeLabel")
