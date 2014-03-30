@@ -19,6 +19,7 @@ class CoffeeModalClass
 
     close: ->
         $('#coffeeModal').modal('hide')
+        @defaults()
 
     _setData: (message, title = "Message", bodyTemplate = null, bodyTemplateData = {}) ->
         @defaults()
@@ -29,8 +30,7 @@ class CoffeeModalClass
         @set("submitLabel", "OK")
 
     _show: ->
-        Meteor.defer ->
-            $('#coffeeModal').modal('show') 
+        $('#coffeeModal').modal('show') 
 
     message: (message, title = "Message", bodyTemplate = null, bodyTemplateData = {}) ->
         @_setData(message, title)
@@ -116,7 +116,7 @@ class CoffeeModalClass
 
         if @callback?
             @callback(yesNo, returnVal, event)
-
+        
     
 
 
@@ -166,7 +166,7 @@ Template.coffeeModal.events
     'submit #modalDialogForm': (e, tmpl) ->
         e.preventDefault()
         CoffeeModal.doCallback(true, e)
-        $('#coffeeModal').modal('hide')
+        CoffeeModal.close()
 
 Template.coffeeModalstatus.helpers
     progressMessage: ->
