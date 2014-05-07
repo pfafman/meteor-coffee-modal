@@ -3,7 +3,7 @@
   <!-- Modal -->
   <div class="coffee-modal modal fade" id="coffeeModal" tabindex="-1" role="dialog" 
     aria-labelledby="coffeeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog {{size}}">
       <div class="modal-content">
         <form id="modalDialogForm" class="form-horizontal" role="form">
           <div class="modal-header">
@@ -19,9 +19,9 @@
           </div>
           <div class="modal-footer">
             {{#if closeLabel}}
-              <button id="closeButton" type="button" class="btn btn-default" data-dismiss="modal">{{closeLabel}}</button>
+              <button id="closeButton" type="button" class="btn {{btnSize}} btn-default" data-dismiss="modal">{{closeLabel}}</button>
             {{/if}}
-            <button id="submitButton" type="submit" class="btn btn-primary">{{submitLabel}}</button>
+            <button id="submitButton" type="submit" class="btn {{btnSize}} btn-primary">{{submitLabel}}</button>
           </div>
         </form>
       </div><!-- /.modal-content -->

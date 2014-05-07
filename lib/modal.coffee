@@ -13,6 +13,8 @@ class CoffeeModalClass
         @set("title", 'Message')
         @set("message", '')
         @set("closeLabel", null)
+        @set("size", null)
+        @set("btnSize", null)
         @set("body_template_data", {})
         @callback = null
         @type = "alert"
@@ -34,7 +36,13 @@ class CoffeeModalClass
 
     message: (message, title = "Message", bodyTemplate = null, bodyTemplateData = {}) ->
         @_setData(message, title)
-        @_show()        
+        @_show() 
+
+    smallMessage: (message, title = "Message", bodyTemplate = null, bodyTemplateData = {}) ->
+        @_setData(message, title)
+        @set("size", 'modal-sm')
+        @set("btnSize", 'btn-sm')
+        @_show()       
 
     alert: (message, alert = "Alert", title = "Alert") ->
         @_setData message, title, "coffeeModalAlert",
@@ -157,6 +165,12 @@ Template.coffeeModal.helpers
 
     isForm: ->
         CoffeeModal.type is 'form'
+
+    size: ->
+        cmGet("size")
+
+    btnSize: ->
+        cmGet("btnSize")
 
 
 Template.coffeeModal.events
