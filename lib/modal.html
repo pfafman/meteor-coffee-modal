@@ -11,8 +11,8 @@
             <h4 class="modal-title" id="coffeeModalLabel">{{title}}</h4>
           </div>
           <div class="modal-body">
-            {{#if template}}
-              {{> template templateData}}
+            {{#if templateName}}
+              {{> UI.dynamic template=templateName data=templateData}}
             {{else}}
               {{{body}}}
             {{/if}}
