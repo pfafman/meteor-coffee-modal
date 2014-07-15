@@ -101,6 +101,17 @@ class CoffeeModalClass
       @set("submitLabel", okText)
       @_show()
 
+  smallForm: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
+      #console.log("form", templateName, data)
+      @_setData('', title, templateName, data)
+      @type = "form"
+      @callback = callback
+      @set("closeLabel", "Cancel")
+      @set("submitLabel", okText)
+      @set("size", 'modal-sm')
+      @set("btnSize", 'btn-sm')
+      @_show()
+
   fromForm: (form) ->
     result = {}
     form = $(form)
