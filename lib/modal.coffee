@@ -100,6 +100,8 @@ class CoffeeModalClass
         title: "Edit Record"
         submitText: 'Submit'
         cancelText: 'Cancel'
+      if not data
+        data = {}
       @_setData('', options.title, options.template, data)
       @type = "form"
       @callback = callback
@@ -108,6 +110,7 @@ class CoffeeModalClass
       if options.smallForm
         @set("size", 'modal-sm')
         @set("btnSize", 'btn-sm')
+      $(".has-error").removeClass('has-error')
       @_show()
 
   form: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
