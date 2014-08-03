@@ -19,9 +19,13 @@
           </div>
           <div class="modal-footer">
             {{#if closeLabel}}
-              <button id="closeButton" type="button" class="btn {{btnSize}} btn-default" data-dismiss="modal">{{closeLabel}}</button>
+              <button id="closeButton" type="button" class="btn {{btnSize}} btn-default" data-dismiss="modal">
+                {{{closeLabel}}}
+              </button>
             {{/if}}
-            <button id="submitButton" type="submit" class="btn {{btnSize}} btn-primary">{{submitLabel}}</button>
+            <button id="submitButton" type="submit" class="btn {{btnSize}} btn-primary">
+              {{{submitLabel}}}
+            </button>
           </div>
         </form>
       </div><!-- /.modal-content -->
