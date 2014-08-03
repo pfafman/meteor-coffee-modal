@@ -213,7 +213,6 @@ Template.coffeeModal.helpers
 
 Template.coffeeModal.events
   "click #closeButton": (e, tmpl) ->
-    console.log('closeButton')
     cmSet("body_template", null)
     CoffeeModal.doCallback(false, e)
 
