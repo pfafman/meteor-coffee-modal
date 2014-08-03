@@ -99,7 +99,7 @@ class CoffeeModalClass
         title: "Edit Record"
         submitText: 'Submit'
         cancelText: 'Cancel'
-      @_setData('', options.title, options.templateName, data)
+      @_setData('', options.title, options.template, data)
       @type = "form"
       @callback = callback
       @set("closeLabel", options.cancelText)
