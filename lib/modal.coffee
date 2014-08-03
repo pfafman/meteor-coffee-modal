@@ -95,7 +95,7 @@ class CoffeeModalClass
 
 
   formWithOptions: (options, data, callback) ->
-    if options?.template? and data?
+    if options?.template?
       _.defaults options,
         title: "Edit Record"
         submitText: 'Submit'
