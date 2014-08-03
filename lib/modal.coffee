@@ -92,6 +92,23 @@ class CoffeeModalClass
       else
           @set("message", message)
 
+
+  formWithOptions: (options, data, callback) ->
+    if options?.template? and data?
+      _.defaults options,
+        title: "Edit Record"
+        okText: 'Submit'
+        closeText: 'Cancel'
+      @_setData('', options.title, options.templateName, data)
+      @type = "form"
+      @callback = callback
+      @set("closeLabel", options.closeText)
+      @set("submitLabel", options.okText)
+      if options.smallForm
+        @set("size", 'modal-sm')
+        @set("btnSize", 'btn-sm')
+      @_show()
+
   form: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
       #console.log("form", templateName, data)
       @_setData('', title, templateName, data)
