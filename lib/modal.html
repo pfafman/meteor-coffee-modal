@@ -8,9 +8,20 @@
         <form id="modalDialogForm" class="form-horizontal" role="form">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="coffeeModalLabel">{{{title}}}</h4>
+            <h4 class="modal-title" id="coffeeModalLabel">
+              {{{title}}}
+            </h4>
           </div>
           <div class="modal-body">
+            {{#if errorMessage}}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+                </button>
+                {{errorMessage}}
+              </div>
+            {{/if}}
             {{#if templateName}}
               {{> UI.dynamic template=templateName data=templateData}}
             {{else}}

@@ -12,6 +12,7 @@ class CoffeeModalClass
       @set("body_template", null)
       @set("title", 'Message')
       @set("message", '')
+      @set("errorMessage", null)
       @set("closeLabel", null)
       @set("size", null)
       @set("btnSize", null)
@@ -156,10 +157,11 @@ class CoffeeModalClass
 
 CoffeeModal = new CoffeeModalClass()
 
-
 cmGet = (key) ->
     Session.get("_coffeeModal_#{key}")
-    #CoffeeModal[key]
+    
+cmSet = (key, value) ->
+  Session.set("_coffeeModal_#{key}", value)
 
 #Template.coffeeModal.created = ->
 #    console.log("coffeeModal created")
@@ -202,6 +204,9 @@ Template.coffeeModal.helpers
   btnSize: ->
     cmGet("btnSize")
 
+  errorMessage: ->
+    cmGet('errorMessage')
+
 
 Template.coffeeModal.events
   "click #closeButton": (e, tmpl) ->
@@ -209,8 +214,11 @@ Template.coffeeModal.events
 
   'submit #modalDialogForm': (e, tmpl) ->
     e.preventDefault()
-    CoffeeModal.doCallback(true, e)
-    CoffeeModal.close()
+    try
+      CoffeeModal.doCallback(true, e)  
+      CoffeeModal.close()
+    catch err
+      cmSet('errorMessage', err.reason)
 
 Template.coffeeModalstatus.helpers
   progressMessage: ->
