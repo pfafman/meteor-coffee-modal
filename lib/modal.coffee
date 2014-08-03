@@ -213,6 +213,8 @@ Template.coffeeModal.helpers
 
 Template.coffeeModal.events
   "click #closeButton": (e, tmpl) ->
+    console.log('closeButton')
+    cmSet("body_template", null)
     CoffeeModal.doCallback(false, e)
 
   'submit #modalDialogForm': (e, tmpl) ->
@@ -220,6 +222,7 @@ Template.coffeeModal.events
     try
       CoffeeModal.doCallback(true, e)  
       CoffeeModal.close()
+      cmSet("body_template", null)
     catch err
       cmSet('errorMessage', err.reason)
 
