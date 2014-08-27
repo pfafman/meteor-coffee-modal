@@ -1,6 +1,8 @@
 Meteor-Coffee-Modal
 ====================
 
+WARNING:  Work in progress
+
 A pattern to display application modal dialogs via a bootstrap, written in coffeescript.
 
 
@@ -9,7 +11,7 @@ A pattern to display application modal dialogs via a bootstrap, written in coffe
 Install via atmosphere.
 
 ```bash
-mrt add coffee-modal
+mrt add pfafman:coffee-modal
 ```
 
 ##Usage
@@ -30,6 +32,8 @@ CoffeeModal.confirm(message, title, callback)
 
 
 ##Notes
+
+There are more undocumented options that need to be documented.  For now I am using this to test how the new packaging system works.
 
 
 
