@@ -1,7 +1,7 @@
 Meteor-Coffee-Modal
 ====================
 
-WARNING:  Work in progress
+#####WARNING:  Work in progress
 
 A pattern to display application modal dialogs via a bootstrap, written in coffeescript.
 
@@ -18,16 +18,22 @@ mrt add pfafman:coffee-modal
 
 Include the following in your template:
 
-	{{> coffeeModal}}
-
+```html
+{{> coffeeModal}}
+```
 
 To display an alert
 
 ```coffeescript
+
 CoffeeModal.message(message, title)
+
 CoffeeModal.alert(message)
+
 CoffeeModal.error(message)
+
 CoffeeModal.confirm(message, title, callback)
+
 ```	
 
 
