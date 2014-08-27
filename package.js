@@ -14,7 +14,6 @@ Package.on_use(function(api, where) {
         'session',
         'jquery',
         'handlebars',
-        'iron:router', 
         'coffeescript',
         'less'
     ], 'client');
