@@ -1,4 +1,6 @@
 
+DEBUG = true
+
 class CoffeeModalClass
 
   constructor: ->
@@ -114,7 +116,8 @@ class CoffeeModalClass
       @_show()
 
   form: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
-      #console.log("form", templateName, data)
+      if DEBUG
+        console.log("form", templateName, data, title)
       @_setData('', title, templateName, data)
       @type = "form"
       @callback = callback
