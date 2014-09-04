@@ -136,15 +136,32 @@ class CoffeeModalClass
       @set("btnSize", 'btn-sm')
       @_show()
 
+
+  addValueToObjFromDotString: (obj, dotString, value) ->
+    path = dotString.split(".")
+    tmp = obj
+    lastPart = path.pop()
+    for part in path
+      # loop through each part of the path adding to obj
+      if not tmp[part]?
+        tmp[part] = {}
+      tmp = tmp[part]
+    if lastPart?
+      tmp[lastPart] = value
+
+
   fromForm: (form) ->
     result = {}
     form = $(form)
     for key in form.serializeArray() # This Works do not change!!!
-        result[key.name] = key.value
+      console.log('serialize', key)
+      @addValueToObjFromDotString(result, key.name, key.value)
+      #result[key.name] = key.value
     # Override the result with the boolean values of checkboxes, if any
     for check in form.find "input:checkbox"
-        result[$(check).prop 'name'] = $(check).prop 'checked'
+      result[$(check).prop 'name'] = $(check).prop 'checked'
     result
+
 
   doCallback: (yesNo, event = null) ->
     switch @type
