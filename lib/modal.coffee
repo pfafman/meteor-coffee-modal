@@ -67,6 +67,7 @@ class CoffeeModalClass
       @set("submitLabel", "Yes")
       @_show()
 
+
   prompt: (message, callback, title = 'Prompt', okText = 'Submit', placeholder = "Enter something ...") ->
       @_setData message, title, "coffeeModalPrompt",
           message: message
@@ -154,9 +155,7 @@ class CoffeeModalClass
     result = {}
     form = $(form)
     for key in form.serializeArray() # This Works do not change!!!
-      console.log('serialize', key)
       @addValueToObjFromDotString(result, key.name, key.value)
-      #result[key.name] = key.value
     # Override the result with the boolean values of checkboxes, if any
     for check in form.find "input:checkbox"
       result[$(check).prop 'name'] = $(check).prop 'checked'
