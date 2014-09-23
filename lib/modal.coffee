@@ -4,97 +4,99 @@ DEBUG = true
 class CoffeeModalClass
 
   constructor: ->
-      @defaults()
+    @defaults()
 
   set: (key, value) ->
-      Session.set("_coffeeModal_#{key}", value)
-      #@[key] = value
+    Session.set("_coffeeModal_#{key}", value)
+    #@[key] = value
 
   defaults: ->
-      @set("body_template", null)
-      @set("title", 'Message')
-      @set("message", '')
-      @set("errorMessage", null)
-      @set("closeLabel", null)
-      @set("size", null)
-      @set("btnSize", null)
-      @set("body_template_data", {})
-      @callback = null
-      @type = "alert"
+    @set("body_template", null)
+    @set("title", 'Message')
+    @set("message", '')
+    @set("errorMessage", null)
+    @set("closeLabel", null)
+    @set("size", null)
+    @set("btnSize", null)
+    @set("body_template_data", {})
+    @callback = null
+    @type = "alert"
 
   close: ->
-      $('#coffeeModal').modal('hide')
-      @defaults()
+    $('#coffeeModal').modal('hide')
+    @defaults()
 
   _setData: (message, title = "Message", bodyTemplate = null, bodyTemplateData = {}) ->
-      @defaults()
-      @set("body_template", bodyTemplate)
-      @set("body_template_data", bodyTemplateData)
-      @set("title", title)
-      @set("message", message)
-      @set("submitLabel", "OK")
+    @defaults()
+    @set("body_template", bodyTemplate)
+    @set("body_template_data", bodyTemplateData)
+    @set("title", title)
+    @set("message", message)
+    @set("submitLabel", "OK")
 
   _show: ->
-      $('#coffeeModal').modal('show') 
+    $('#coffeeModal').modal
+      backdrop: true #'static'
+
 
   message: (message, title = "Message", bodyTemplate = null, bodyTemplateData = {}) ->
-      @_setData(message, title)
-      @_show() 
+    @_setData(message, title)
+    @_show()
 
   smallMessage: (message, title = "Message", bodyTemplate = null, bodyTemplateData = {}) ->
-      @_setData(message, title)
-      @set("size", 'modal-sm')
-      @set("btnSize", 'btn-sm')
-      @_show()       
+    @_setData(message, title)
+    @set("size", 'modal-sm')
+    @set("btnSize", 'btn-sm')
+    @_show()
 
   alert: (message, alert = "Alert", title = "Alert") ->
-      @_setData message, title, "coffeeModalAlert",
-          label: alert
-          message: message
-      @_show()
+    @_setData message, title, "coffeeModalAlert",
+      label: alert
+      message: message
+    @_show()
 
   error: (message, alert = "Error", title = "Error") ->
-      @_setData message, title, "coffeeModalError",
-          label: alert
-          message: message
-      @_show()
+    @_setData message, title, "coffeeModalError",
+      label: alert
+      message: message
+    @_show()
 
   confirm: (message, callback, title = "Confirm") ->
-      @_setData(message, title)
-      @type = "confirm"
-      @callback = callback
-      @set("closeLabel", "Cancel")
-      @set("submitLabel", "Yes")
-      @_show()
+    @_setData(message, title)
+    @type = "confirm"
+    @callback = callback
+    @set("closeLabel", "Cancel")
+    @set("submitLabel", "Yes")
+    @_show()
 
 
   prompt: (message, callback, title = 'Prompt', okText = 'Submit', placeholder = "Enter something ...") ->
-      @_setData message, title, "coffeeModalPrompt",
-          message: message
-          placeholder: placeholder
-      @type = "prompt"
-      @callback = callback
-      @set("closeLabel", "Cancel")
-      @set("submitLabel", okText)
-      $('#promptInput').val('')
-      @_show()
+    @_setData message, title, "coffeeModalPrompt",
+      message: message
+      placeholder: placeholder
+    @type = "prompt"
+    @callback = callback
+    @set("closeLabel", "Cancel")
+    @set("submitLabel", okText)
+    $('#promptInput').val('')
+    @_show()
 
 
   status: (message, callback, title = 'Status', cancelText = 'Cancel') ->
-      @_setData message, title, "coffeeModalstatus",
-          message: message
-      @callback = callback
-      @set("submitLabel", cancelText)
-      @_show()
+    @_setData message, title, "coffeeModalstatus",
+      message: message
+    @callback = callback
+    @set("submitLabel", cancelText)
+    @_show()
 
   updateProgressMessage: (message) ->
-      console.log("updateProgressMessage", $("#progressMessage").html(), message)
-      if $("#progressMessage").html()?
-          $("#progressMessage").fadeOut 400, ->
-              $("#progressMessage").html(message)
-              $("#progressMessage").fadeIn(400)
-      else
-          @set("message", message)
+    console.log("updateProgressMessage", $("#progressMessage").html(), message)
+    if $("#progressMessage").html()?
+      $("#progressMessage").fadeOut 400, ->
+        $("#progressMessage").html(message)
+        $("#progressMessage").fadeIn(400)
+    else
+      @set("message", message)
 
 
   formWithOptions: (options, data, callback) ->
@@ -117,25 +119,25 @@ class CoffeeModalClass
       @_show()
 
   form: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
-      if DEBUG
-        console.log("form", templateName, data, title)
-      @_setData('', title, templateName, data)
-      @type = "form"
-      @callback = callback
-      @set("closeLabel", "Cancel")
-      @set("submitLabel", okText)
-      @_show()
+    if DEBUG
+      console.log("form", templateName, data, title)
+    @_setData('', title, templateName, data)
+    @type = "form"
+    @callback = callback
+    @set("closeLabel", "Cancel")
+    @set("submitLabel", okText)
+    @_show()
 
   smallForm: (templateName, data, callback, title = "Edit Record", okText = 'Submit') ->
-      #console.log("form", templateName, data)
-      @_setData('', title, templateName, data)
-      @type = "form"
-      @callback = callback
-      @set("closeLabel", "Cancel")
-      @set("submitLabel", okText)
-      @set("size", 'modal-sm')
-      @set("btnSize", 'btn-sm')
-      @_show()
+    #console.log("form", templateName, data)
+    @_setData('', title, templateName, data)
+    @type = "form"
+    @callback = callback
+    @set("closeLabel", "Cancel")
+    @set("submitLabel", okText)
+    @set("size", 'modal-sm')
+    @set("btnSize", 'btn-sm')
+    @_show()
 
 
   addValueToObjFromDotString: (obj, dotString, value) ->
@@ -165,23 +167,23 @@ class CoffeeModalClass
   doCallback: (yesNo, event = null) ->
     switch @type
       when 'prompt'
-          returnVal = $('#promptInput').val()
+        returnVal = $('#promptInput').val()
       when 'select'
-          returnVal = $('select option:selected')
+        returnVal = $('select option:selected')
       when 'form'
-          returnVal = @fromForm(event.target)
+        returnVal = @fromForm(event.target)
       else
-          returnVal = null
+        returnVal = null
 
     if @callback?
       @callback(yesNo, returnVal, event)
-        
+
 
 CoffeeModal = new CoffeeModalClass()
 
 cmGet = (key) ->
-    Session.get("_coffeeModal_#{key}")
-    
+  Session.get("_coffeeModal_#{key}")
+
 cmSet = (key, value) ->
   Session.set("_coffeeModal_#{key}", value)
 
@@ -238,7 +240,7 @@ Template.coffeeModal.events
   'submit #modalDialogForm': (e, tmpl) ->
     e.preventDefault()
     try
-      CoffeeModal.doCallback(true, e)  
+      CoffeeModal.doCallback(true, e)
       CoffeeModal.close()
       cmSet("body_template", null)
     catch err
@@ -247,7 +249,3 @@ Template.coffeeModal.events
 Template.coffeeModalstatus.helpers
   progressMessage: ->
     cmGet("message")
-
-
-
-

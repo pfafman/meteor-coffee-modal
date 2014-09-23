@@ -1,15 +1,15 @@
 Package.describe({
     summary: "Display a modal via bootstrap written in coffeescript",
-  version: "0.3.5",
+  version: "0.3.6",
   git: "https://github.com/pfafman/meteor-coffee-modal.git"
 });
 
 Package.on_use(function(api, where) {
   api.versionsFrom("METEOR@0.9.0");
-  
+
     api.use([
-        'minimongo', 
-        'mongo-livedata', 
+        'minimongo',
+        'mongo-livedata',
         'templating',
         'session',
         'jquery',
@@ -17,7 +17,7 @@ Package.on_use(function(api, where) {
         'coffeescript',
         'less'
     ], 'client');
-  
+
     api.add_files([
         'lib/modal.less',
         'lib/modal.html',
@@ -32,7 +32,7 @@ Package.on_use(function(api, where) {
 
 
 Package.on_test(function(api) {
-    api.use("pfafman:coffee-modal", 'client'); 
+    api.use("pfafman:coffee-modal", 'client');
     api.use(['tinytest', 'test-helpers', 'coffeescript'], 'client');
-    api.add_files('modal_tests.coffee', 'client'); 
+    api.add_files('modal_tests.coffee', 'client');
 });
