@@ -161,7 +161,8 @@ class CoffeeModalClass
       @addValueToObjFromDotString(result, key.name, key.value)
     # Override the result with the boolean values of checkboxes, if any
     for check in form.find "input:checkbox"
-      result[$(check).prop 'name'] = $(check).prop 'checked'
+      if $(check).prop('name')
+        result[$(check).prop('name')] = $(check).prop 'checked'
     result
 
 
