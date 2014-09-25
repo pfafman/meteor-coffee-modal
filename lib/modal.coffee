@@ -1,5 +1,5 @@
 
-DEBUG = true
+DEBUG = false
 
 class CoffeeModalClass
 
@@ -90,7 +90,8 @@ class CoffeeModalClass
     @_show()
 
   updateProgressMessage: (message) ->
-    console.log("updateProgressMessage", $("#progressMessage").html(), message)
+    if DEBUG
+      console.log("updateProgressMessage", $("#progressMessage").html(), message)
     if $("#progressMessage").html()?
       $("#progressMessage").fadeOut 400, ->
         $("#progressMessage").html(message)
