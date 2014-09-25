@@ -1,6 +1,6 @@
 Package.describe({
     summary: "Display a modal via bootstrap written in coffeescript",
-  version: "0.3.7",
+  version: "0.3.8",
   git: "https://github.com/pfafman/meteor-coffee-modal.git"
 });
 
