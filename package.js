@@ -1,11 +1,11 @@
 Package.describe({
     summary: "Display a modal via bootstrap written in coffeescript",
-  version: "0.3.8",
+  version: "0.4.0",
   git: "https://github.com/pfafman/meteor-coffee-modal.git"
 });
 
 Package.on_use(function(api, where) {
-  api.versionsFrom("METEOR@0.9.0");
+  api.versionsFrom("METEOR@1.0");
 
     api.use([
         'minimongo',
